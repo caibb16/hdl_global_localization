@@ -1,0 +1,25 @@
+# estimation parameters
+
+
+ransac/voxel_based: True          # 是否使用体素滤波   这个可以减少点云数量 提高速度
+ransac/max_iterations: 1000000    # 最大的迭代次数
+ransac/matching_budget: 10000     # 每次匹配考虑的最多点数   太大会导致过载
+ransac/max_correspondence_distance: 1.0   #室外可能需要把这个变小   超过1m后就不再认为是对应点
+ransac/similarity_threshold: 0.5    # 判断两个点是不是相似的阈值，超过这个阈值就认为是相似点
+ransac/correspondence_randomness: 2        #室外可能需要把这个变大  对应着增大搜索空间
+ransac/inlier_fraction: 0.5        # 这个是成功的比例  0.5表示成功的一半点是内点  室外可能需要把这个变小
+
+# valid transformation range
+ransac/x_min: -40.0
+ransac/x_max: 40.0
+ransac/y_min: -40.0
+ransac/y_max: 40.0
+ransac/z_min: -4.0
+ransac/z_max: 3.0
+
+ransac/roll_min: -1
+ransac/roll_max: 1
+ransac/pitch_min: -1
+ransac/pitch_max: 1
+ransac/yaw_min: -3.15
+ransac/yaw_max: 3.15

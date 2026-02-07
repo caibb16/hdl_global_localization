@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 参数配置 -->
+  <arg name="engine" default="FPFH_RANSAC" doc="定位算法: BBS, FPFH_RANSAC, FPFH_TEASER"/>
+  <arg name="map_topic" default="/globalmap" doc="全局地图话题"/>
+  <arg name="cloud_topic" default="/velodyne_points" doc="点云话题"/>
+  <arg name="auto_mode" default="false" doc="是否自动持续定位"/>
+  <arg name="localization_rate" default="1.0" doc="自动模式下的定位频率(Hz)"/>
+  <arg name="max_candidates" default="1" doc="返回的候选位姿数量"/>
+  
+  <!-- 启动 hdl_global_localization 核心节点 -->
+  <include file="$(find hdl_global_localization)/launch/hdl_global_localization.launch"/>
+  
+  <!-- 启动自动初始位姿节点 -->
+  <node pkg="hdl_global_localization" type="auto_initialpose.py" name="auto_initialpose" output="screen">
+    <param name="engine" value="$(arg engine)"/>
+    <param name="map_topic" value="$(arg map_topic)"/>
+    <param name="cloud_topic" value="$(arg cloud_topic)"/>
+    <param name="auto_mode" value="$(arg auto_mode)"/>
+    <param name="localization_rate" value="$(arg localization_rate)"/>
+    <param name="max_candidates" value="$(arg max_candidates)"/>
+  </node>
+  
+</launch>
